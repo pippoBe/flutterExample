@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yugen_mobile_app/pages/generator_page/main.dart';
+import 'package:yugen_mobile_app/pages/favourites/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,6 +52,8 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+  // Map<int, String> favs = {};
+  // var favo = <int, WordPair>{};
 
   void getNext() {
     current = WordPair.random();
@@ -59,8 +62,10 @@ class MyAppState extends ChangeNotifier {
 
   var favorites = <WordPair>[];
 
+  bool checkIsLike () => favorites.contains(current);
+
   void toggleFavorite() {
-    if (favorites.contains(current)) {
+    if (checkIsLike()) {
       favorites.remove(current);
     } else {
       favorites.add(current);
@@ -149,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorPage(pair: pair, );
+        page = GeneratorPage();
         break;
       case 1:
         page = FavoritesPage();
@@ -191,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class FavLine extends StatelessWidget {
+/*class FavLine extends StatelessWidget {
   const FavLine({
     super.key,
     required this.label,
@@ -219,9 +224,9 @@ class FavLine extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
-class FavoritesPage extends StatelessWidget {
+/*class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
@@ -247,5 +252,5 @@ class FavoritesPage extends StatelessWidget {
         )
     );
   }
-}
+}*/
 
